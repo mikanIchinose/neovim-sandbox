@@ -1,0 +1,106 @@
+# plugin manager
+[[plugins]]
+repo = 'Shougo/dein.vim'
+[[plugins]]
+repo = 'wsdjeg/dein-ui.vim'
+depends = ['dein']
+
+
+
+# colorful parentheses
+[[plugins]]
+repo = 'kien/rainbow_parentheses.vim'
+
+# status line
+# [[plugins]]
+# repo = 'itchyny/lightline.vim'
+# [[plugins]]
+# repo = 'mengelbrecht/lightline-bufferline'
+
+[[plugins]]
+repo = 'morhetz/gruvbox'
+hook_add = '''
+set background=dark
+colorscheme gruvbox
+'''
+
+# [[plugins]]
+# repo = 'nathanaelkane/vim-indent-guides'
+
+# general syntax highlighter
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+merged = 0
+
+[[plugins]]
+repo = 'folke/which-key.nvim'
+
+# [[plugins]]
+# repo = 'kyazdani42/nvim-web-devicons'
+
+# 直前の処理を.で繰り返せる
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+# fuzzy finder
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+merged = 0
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+
+# lsp
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+depends = ['nvim-lspinstall', 'nvim-compe']
+[[plugins]]
+repo = 'kabouzeid/nvim-lspinstall'
+[[plugins]]
+repo = 'hrsh7th/nvim-compe'
+depends = ['vim-vsnip']
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+
+# auto close
+[[plugins]]
+repo = 'cohama/lexima.vim'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
+[[plugins]]
+repo='editorconfig/editorconfig-vim'
+
+# git
+# [[plugins]]
+# repo = 'tpope/vim-fugitive'
+# [[plugins]]
+# repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'tyru/caw.vim'
+
+# [[plugins]]
+# repo='thinca/vim-quickrun'
+
+# ペーストモードを自動で切り替える
+[[plugins]]
+repo = 'roxma/vim-paste-easy'
+
+# insert semicolon or comma
+[[plugins]]
+repo = 'lfilho/cosco.vim'
+on_ft = ['php', 'rust', 'java', 'lua']
+
+# ^vg_や0v$hで指定するテキスト範囲をもっと簡単に選択できるようにする
+# val: 改行を含まずに一行まるごと選択
+# vil: 両端の空白を除いた一行まるごと選択
+[[plugins]]
+repo='kana/vim-textobj-line'
+depends=['vim-textobj-user']
+[[plugins]]
+repo='kana/vim-textobj-user'

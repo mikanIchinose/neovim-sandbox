@@ -1,0 +1,17 @@
+version: '3'
+services:
+  neovim-minimal:
+    build: 
+      context: .
+      args:
+        VIM_ENABLE_NODE: ''
+        VIM_ENABLE_PYTHON: 'y'
+        VIM_ENABLE_PYTHON3: 'y'
+        VIM_ENABLE_DEIN: 'y'
+        VIM_ENABLE_PACKER: ''
+        RIPGREP_VERSION: ''
+        FD_VERSION: ''
+    volumes:
+      - ./nvim:/home/ichinose/.config/nvim
+    tty: true
+

@@ -1,0 +1,8 @@
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_cmd = 'Denite'
+[plugins.ftplugin]
+denite = '''
+nnoremap <silent><buffer><expr> p
+\ denite#do_map('do_action', 'vsplit')
+'''

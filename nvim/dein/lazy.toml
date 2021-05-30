@@ -1,0 +1,52 @@
+[[plugins]]
+repo = 'Shougo/defx.nvim'
+depends = ['defx-icons']
+hook_add = '''
+nnoremap <silent> <C-o>
+\ <Cmd>Defx -listed -resume -buffer-name=win-`win_getid()`<CR>
+'''
+[plugins.ftplugin]
+defx = '''
+lua require"plugins.defx.keymappings"
+'''
+
+[[plugins]]
+repo ="kristijanhusak/defx-git"
+
+[[plugins]]
+repo ="kristijanhusak/defx-icons"
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_cmd = 'Denite'
+hook_source = 'lua require"plugins.denite"'
+hook_add = '''
+'''
+[plugins.ftplugin]
+denite = '''
+nnoremap <silent><buffer><expr> <CR>
+\ denite#do_map('do_action')
+nnoremap <silent><buffer><expr> a
+\ denite#do_map('choose_action')
+nnoremap <silent><buffer><expr> d
+\ denite#do_map('do_action', 'delete')
+nnoremap <silent><buffer><expr> p
+\ denite#do_map('do_action', 'preview')
+nnoremap <silent><buffer><expr> N
+\ denite#do_map('do_action', 'new')
+nnoremap <silent><buffer><expr> q
+\ denite#do_map('quit')
+nnoremap <silent><buffer><expr> i
+\ denite#do_map('open_filter_buffer')
+nnoremap <silent><buffer><expr> <Space>
+\ denite#do_map('toggle_select').'j'
+nnoremap <silent><buffer><expr> r
+\ denite#do_map('do_action', 'quickfix')
+nnoremap <silent><buffer><expr> s
+\ denite#do_map('do_action', 'split')
+nnoremap <silent><buffer><expr> v
+\ denite#do_map('do_action', 'vsplit')
+'''
+denite-filter = '''
+imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+'''

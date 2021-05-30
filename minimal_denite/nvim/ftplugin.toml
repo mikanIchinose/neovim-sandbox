@@ -1,0 +1,4 @@
+[ftplugin]
+_ = '''
+:lua print'hello world'
+'''

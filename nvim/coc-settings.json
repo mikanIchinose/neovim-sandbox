@@ -1,0 +1,7 @@
+{
+    "Lua.workspace.library": {
+        "$VIMRUNTIME/lua": true,
+        "$VIMRUNTIME/lua/vim/lsp": true
+    },
+    "Lua.runtime.version": "LuaJIT"
+}

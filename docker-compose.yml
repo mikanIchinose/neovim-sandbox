@@ -1,0 +1,19 @@
+version: '3'
+services:
+  neovim-sandbox:
+    build: 
+      context: .
+      args:
+        VIM_ENABLE_NODE: 'y'
+        VIM_ENABLE_PYTHON: 'y'
+        VIM_ENABLE_PYTHON3: 'y'
+        VIM_ENABLE_DEIN: 'y'
+        VIM_ENABLE_PACKER: ''
+        RIPGREP_VERSION: '12.1.1'
+        FD_VERSION: '8.2.1'
+    volumes:
+      - ./nvim:/home/ichinose/.config/nvim
+    tty: true
+    env_file:
+      - .env
+
