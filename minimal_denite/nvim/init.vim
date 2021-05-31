@@ -17,7 +17,7 @@ if dein#load_state(expand('~/.cache/dein'))
   call dein#load_toml(s:base_toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
   call dein#load_toml(s:ft_toml)
-  call dein#recache_runtimepath()
+"  call dein#recache_runtimepath()
   
   call dein#end()
   call dein#save_state()
