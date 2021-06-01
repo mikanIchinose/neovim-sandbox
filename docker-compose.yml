@@ -4,6 +4,7 @@ services:
     build: 
       context: .
       args:
+        USER_NAME: 'neovim'
         VIM_ENABLE_NODE: 'y'
         VIM_ENABLE_PYTHON: 'y'
         VIM_ENABLE_PYTHON3: 'y'
@@ -12,7 +13,7 @@ services:
         RIPGREP_VERSION: '12.1.1'
         FD_VERSION: '8.2.1'
     volumes:
-      - ./nvim:/home/ichinose/.config/nvim
+      - ./nvim:/home/neovim/.config/nvim
     tty: true
     env_file:
       - .env

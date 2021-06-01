@@ -2,6 +2,7 @@
 require'globals'
 
 -- plugin
+-- vim.cmd('source ~/.config/nvim/vimscript/dein.vim')
 require 'plugins.dein'
 require 'plugins.nvim-treesitter'
 require 'plugins.caw'
@@ -24,3 +25,5 @@ require'utils'
 require'lsp'
 require'lsp.lua'
 require'lsp.javascript'
+require'lsp.vimL'
+require'lsp.kotlin'

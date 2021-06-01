@@ -16,10 +16,6 @@ RUN apt-get update  -qq \
       curl build-essential git unzip \
       # PPA取得のために必要
       software-properties-common \
-      # 日本語化
-      # language-pack-ja-base \
-      # language-pack-ja \
-      # locales \
       # sudo command
       sudo \
       # 環境依存
@@ -28,10 +24,6 @@ RUN apt-get update  -qq \
       ${VIM_ENABLE_PYTHON3:+python3-dev python3-pip} \
   && apt-get -yq clean \
   && rm -rf /var/lib/apt/lists/*
-
-# set locale Japan
-# RUN locale-gen ja_JP.UTF-8
-# ENV LANG="ja_JP.UTF-8"
 
 # install latest node
 RUN if [ ! -z "${VIM_ENABLE_NODE}" ]; \
@@ -52,12 +44,12 @@ RUN if [ ! -z "${RIPGREP_VERSION}" ]; \
     ; \
   fi
 
-# RUN if [ ! -z "${FD_VERSION}" ]; \
-  # then \
-    # curl -LO https://github.com/sharkdp/fd/releases/download/v${FD_VERSION}/fd_${FD_VERSION}_amd64.deb \
-    # && dpkg -i fd_${FD_VERSION}_amd64.deb \
-    # && rm fd_${FD_VERSION}_amd64.deb ; \
-  # fi
+RUN if [ ! -z "${FD_VERSION}" ]; \
+  then \
+    curl -LO https://github.com/sharkdp/fd/releases/download/v${FD_VERSION}/fd_${FD_VERSION}_amd64.deb \
+    && dpkg -i fd_${FD_VERSION}_amd64.deb \
+    && rm fd_${FD_VERSION}_amd64.deb ; \
+  fi
 
 # install neovim nightly
 RUN add-apt-repository ppa:neovim-ppa/unstable \
@@ -66,14 +58,14 @@ RUN add-apt-repository ppa:neovim-ppa/unstable \
   && apt-get -yq clean
 
 # 一般ユーザーの追加(パスワードのいらないsudoユーザーとして登録)
-ARG UID=1000 USER_NAME=ichinose
+ARG UID=1000 USER_NAME
 RUN useradd -m -u ${UID} ${USER_NAME} \
   && gpasswd -a ${USER_NAME} sudo \
   && echo "${USER_NAME}:password" | chpasswd \
   && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # change ichinose
-ENV HOME_DIRECTORY="/home/ichinose" 
+ENV HOME_DIRECTORY="/home/${USER_NAME}" 
 ENV DEINVIM_DIRECTORY=".cache/dein"
 USER ${UID}
 WORKDIR ${HOME_DIRECTORY}
@@ -87,7 +79,6 @@ RUN python3 -m pip install --upgrade pip setuptools \
 RUN mkdir -p ${HOME_DIRECTORY}/.config/nvim
 
 # install dein.vim
-RUN echo "dein ${VIM_ENABLE_DEIN}, packer: ${VIM_ENABLE_PACKER}"
 RUN [ -z "${VIM_ENABLE_DEIN}" ] \
   || curl -sf \
     https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh \

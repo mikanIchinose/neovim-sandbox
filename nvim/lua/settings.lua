@@ -34,8 +34,8 @@ o.hlsearch = true -- incremental search
 o.ignorecase = true -- 検索にて大文字小文字を区別しない
 o.smartcase = true -- 大文字を使ったときはケースセンシティブにする
 
-o.showtabline = 2 -- タブを常に表示
-o.cmdheight = 2 -- more line of command for plugins
+o.showtabline = 2 -- always show tab
+o.cmdheight = 1 -- more line of command for plugins
 o.helplang = 'ja' -- japanese help page
 
 wo.number = true -- show column number
