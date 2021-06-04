@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-ENV TZ="Asia/Tokyo" 
+# ENV TZ="Asia/Tokyo" 
 
 ARG VIM_ENABLE_NODE
 ARG VIM_ENABLE_PYTHON
@@ -14,16 +14,21 @@ RUN apt-get update  -qq \
   && DEBIAN_FRONTEND=noninteractive \
     apt-get install -yq --no-install-recommends \
       curl build-essential git unzip \
-      # PPA取得のために必要
       software-properties-common \
-      # sudo command
       sudo \
+      # japanese
+      # language-pack-ja-base \
+      # language-pack-ja \
+      # locales \
       # 環境依存
       ${VIM_ENABLE_NODE:+nodejs npm} \
       ${VIM_ENABLE_PYTHON:+python-dev python-pip} \
       ${VIM_ENABLE_PYTHON3:+python3-dev python3-pip} \
   && apt-get -yq clean \
   && rm -rf /var/lib/apt/lists/*
+
+# RUN locale-gen ja_JP.UTF-8
+# ENV LANG="ja_JP.UTF-8"
 
 # install latest node
 RUN if [ ! -z "${VIM_ENABLE_NODE}" ]; \
