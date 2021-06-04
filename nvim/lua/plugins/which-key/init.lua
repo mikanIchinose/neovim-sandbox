@@ -49,6 +49,7 @@ local map = {
         file = {':Denite -vertical-preview -preview-width=60 file/rec <CR>', 'file'},
         buffer = {':Denite buffer <CR>', 'buffer'},
         command = {':Denite command <CR>', 'command'},
+        defx = {':Denite defx/drive <CR>', 'drive'},
     },
     split = {
         horizontal = {':split<CR>', 'horizontally'},
@@ -89,6 +90,7 @@ wk.register(
                 r = map.fzf.search_code,
                 b = map.denite.buffer,
                 c = map.denite.command,
+                d = map.denite.defx,
             },
         },
         gcc = map.comment.toggle_comment,
