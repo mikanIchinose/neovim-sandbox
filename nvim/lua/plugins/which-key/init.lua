@@ -12,22 +12,18 @@ wk.setup{
 }
 
 local map = {
-    fzf = {
-        search_file = {':Files<CR>', 'find file'},
-        search_code = {':Rg<CR>', 'find code'},
-        search_buffer = {':Buffers<CR>', 'find buffers'},
-    },
     save = {
         current_buffer = {':update<CR>', 'save current buffer'},
         all_buffers = {':wall<CR>', 'save all buffers'},
     },
-    insert_line = {
-        below = {'o<ESC>', 'insert line below'},
-        above = {'O<ESC>', 'insert line above'},
-    },
     quit = {
         current_window = {':quit<CR>', 'close current window'},
         all_windows = {':qall<CR>', 'close all windows'},
+    },
+    save_and_quit = {':wq<CR>', 'save and quit'},
+    insert_line = {
+        below = {'O<ESC>', 'insert line below'},
+        above = {'o<ESC>', 'insert line above'},
     },
     turn_highlight_off = {':nohl<CR>', 'turn highlight off'},
     comment = {
@@ -43,13 +39,16 @@ local map = {
         below = {'<Plug>(caw:jump:comment-next)', 'comment below'},
         above = {'<Plug>(caw:jump:comment-prev)', 'comment above'},
     },
-    -- dein = {
-    -- },
+    fzf = {
+        file   = {':Files<CR>',   'file'},
+        code   = {':Rg<CR>',      'code'},
+        buffer = {':Buffers<CR>', 'buffer'},
+    },
     denite = {
-        file = {':Denite -vertical-preview -preview-width=60 file/rec <CR>', 'file'},
-        buffer = {':Denite buffer <CR>', 'buffer'},
+        file    = {':Denite -vertical-preview -preview-width=60 file/rec <CR>', 'file'},
+        buffer  = {':Denite buffer <CR>', 'buffer'},
         command = {':Denite command <CR>', 'command'},
-        defx = {':Denite defx/drive <CR>', 'drive'},
+        defx    = {':Denite defx/drive <CR>', 'drive'},
     },
     split = {
         horizontal = {':split<CR>', 'horizontally'},
@@ -63,15 +62,22 @@ wk.register(
         ['<leader>'] = {
             ['|'] = map.split.vertical,
             ['-'] = map.split.horizontal,
-            w = map.save.current_buffer,
-            W = map.save.all_buffers,
+            w = {
+                name = '+save',
+                w = map.save.current_buffer,
+                a = map.save.all_buffers,
+                q = map.save_and_quit,
+            },
+            q = {
+                name = '+quit',
+                q = map.quit.current_window,
+                a = map.quit.all_windows,
+            },
             o = map.insert_line.above,
             O = map.insert_line.below,
             n = map.turn_highlight_off,
-            q = map.quit.current_window,
-            Q = map.quit.all_windows,
             c = {
-                name = 'comment',
+                name = '+comment',
                 c = map.comment.toggle_comment,
                 i = map.comment.hatposition,
                 ui = map.comment.hatposition_uncomment,
@@ -85,12 +91,11 @@ wk.register(
                 p = map.comment.above,
             },
             f = {
-                name = 'find something',
-                f = map.denite.file,
-                r = map.fzf.search_code,
-                b = map.denite.buffer,
+                name = '+find',
+                f = map.fzf.file,
+                r = map.fzf.code,
+                b = map.fzf.buffer,
                 c = map.denite.command,
-                d = map.denite.defx,
             },
         },
         gcc = map.comment.toggle_comment,

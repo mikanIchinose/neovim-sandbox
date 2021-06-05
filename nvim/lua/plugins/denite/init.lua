@@ -1,9 +1,9 @@
 if vim.fn.executable('rg') then
     -- file/recにを使う
-    vim.call(
-        'denite#custom#var','file/rec','command',
-        {'rg','--files','--glob','!.git','--color','never'}
-    )
+    -- vim.call(
+        -- 'denite#custom#var','file/rec','command',
+        -- {'rg','--files','--glob','!.git','--color','never'}
+    -- )
     -- grepにripgrepを使う
     vim.call(
         'denite#custom#var','grep',

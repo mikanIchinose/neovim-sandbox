@@ -2,10 +2,10 @@
 repo = 'Shougo/defx.nvim'
 depends = ['defx-icons']
 on_cmd = 'Denite'
-hook_add = '''
-nnoremap <silent> <C-o>
-\ <Cmd>Defx -listed -resume -buffer-name=win-`win_getid()`<CR>
-'''
+# hook_add = '''
+# nnoremap <silent> <C-o>
+# \ <Cmd>Defx -listed -resume -buffer-name=win-`win_getid()`<CR>
+# '''
 [plugins.ftplugin]
 defx = '''
 lua require"plugins.defx.keymappings"

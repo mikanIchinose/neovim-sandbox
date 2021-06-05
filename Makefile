@@ -13,4 +13,4 @@ down:
 	docker-compose down
 
 nvim:
-	docker-compose exec neovim-sandbox bash
+	docker-compose exec neovim bash

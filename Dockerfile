@@ -9,6 +9,7 @@ ARG VIM_ENABLE_PACKER
 ARG VIM_ENABLE_DEIN
 ARG RIPGREP_VERSION
 ARG FD_VERSION
+ARG BAT_VERSION
 
 RUN apt-get update  -qq \ 
   && DEBIAN_FRONTEND=noninteractive \
@@ -30,7 +31,6 @@ RUN apt-get update  -qq \
 # RUN locale-gen ja_JP.UTF-8
 # ENV LANG="ja_JP.UTF-8"
 
-# install latest node
 RUN if [ ! -z "${VIM_ENABLE_NODE}" ]; \
   then \
     npm install -g n && \
@@ -40,7 +40,6 @@ RUN if [ ! -z "${VIM_ENABLE_NODE}" ]; \
     ; \
   fi
 
-# install ripgrep
 RUN if [ ! -z "${RIPGREP_VERSION}" ]; \
   then \
     curl -LO https://github.com/BurntSushi/ripgrep/releases/download/${RIPGREP_VERSION}/ripgrep_${RIPGREP_VERSION}_amd64.deb && \
@@ -56,7 +55,13 @@ RUN if [ ! -z "${FD_VERSION}" ]; \
     && rm fd_${FD_VERSION}_amd64.deb ; \
   fi
 
-# install neovim nightly
+RUN if [ ! -z "${BAT_VERSION}" ]; \
+  then \
+    curl -LO https://github.com/sharkdp/bat/releases/download/v${BAT_VERSION}/bat_${BAT_VERSION}_amd64.deb \
+    && dpkg -i bat_${BAT_VERSION}_amd64.deb \
+    && rm bat_${BAT_VERSION}_amd64.deb ; \
+  fi
+
 RUN add-apt-repository ppa:neovim-ppa/unstable \
   && apt-get update -qq \
   && apt-get install -yq neovim \
@@ -69,31 +74,23 @@ RUN useradd -m -u ${UID} ${USER_NAME} \
   && echo "${USER_NAME}:password" | chpasswd \
   && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# change ichinose
 ENV HOME_DIRECTORY="/home/${USER_NAME}" 
-ENV DEINVIM_DIRECTORY=".cache/dein"
 USER ${UID}
 WORKDIR ${HOME_DIRECTORY}
 
-# install python neovim client
 RUN python3 -m pip install --upgrade pip setuptools \
   && python3 -m pip install --user pynvim \
   && sudo rm -rf /root/.cache
 
-# nvim config directory
 RUN mkdir -p ${HOME_DIRECTORY}/.config/nvim
 
-# install dein.vim
 RUN [ -z "${VIM_ENABLE_DEIN}" ] \
   || curl -sf \
     https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh \
-    | sh -s "${HOME_DIRECTORY}/${DEINVIM_DIRECTORY}"
+    | sh -s "${HOME_DIRECTORY}/.cache/dein"
 
-# install packer.nvim
 RUN [ -z "$VIM_ENABLE_PACKER" ] \
   || git clone https://github.com/wbthomason/packer.nvim \
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-LABEL maintainer="mikan.ichinose <maruisansmai@gmail.com>"
-
-# ENTRYPOINT ["nvim"]
+LABEL maintainer="Ichinose Yoshihiro <maruisansmai@gmail.com>"

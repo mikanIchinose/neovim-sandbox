@@ -36,7 +36,7 @@ end
 utils.set_keymap({
     i_expr = {
         {'<C-Space>', 'compe#complete()'},
-        {'<CR>', 'compe#confirm(\'<CR>\')'},
+        {'<CR>', 'compe#confirm(lexima#expand(\'<LT>CR>\', \'i\'))'},
         {'<Tab>', 'v:lua.tab_complete()'},
         {'<S-Tab>', 'v:lua.s_tab_complete()'},
     }

@@ -1,3 +1,4 @@
+local g = vim.g
 -- appearance
 vim.cmd[[
 autocmd FileType defx setlocal nonumber norelativenumber nocursorline
@@ -10,27 +11,30 @@ autocmd FileType defx setlocal signcolumn="no"
     -- autocmd FileType defx setlocal signcolumn="no"
 -- augroup END
 -- ]]
--- vim.call('defx#custom#option', '_', {
---     columns = 'mark:indent:icons:filename:type:size',
---     root_marker = ' ',
---     winwidth = 50,
---     split = 'vertical',
---     direction = 'botright',
---     show_ignored_files = 0,
---     toggle = 1,
---     resume = 1,
--- })
--- vim.call('defx#custom#column', 'filename', {
---     min_width = 0,
---     max_width = 20,
--- })
--- vim.call('defx#custom#column', 'icon', {
---     opened_icon = ''
--- })
+vim.call('defx#custom#option', '_', {
+    columns = 'mark:indent:icons:filename:type:size',
+    root_marker = ' ',
+    winwidth = 50,
+    split = 'vertical',
+    direction = 'botright',
+    show_ignored_files = 0,
+    toggle = 1,
+    resume = 1,
+})
+vim.call('defx#custom#column', 'filename', {
+    min_width = 0,
+    max_width = 20,
+})
+vim.call('defx#custom#column', 'icon', {
+    opened_icon = ''
+})
+vim.call('defx#custom#option','_','drives',{
+    vim.fn.expand('~/.config')
+})
 
 -- keybind
 local n_expr_buf = {
-    {'<CR>', 'defx#do_action("open")'},
+    {'<CR>', 'defx#do_action("drop")'},
     {'c', 'defx#do_action("copy")'},
     {'m', "defx#do_action('move')"},
     {'p', "defx#do_action('paste')"},
@@ -41,8 +45,8 @@ local n_expr_buf = {
     {'K', "defx#do_action('new_directory')"},
     {'N', "defx#do_action('new_file')"},
     {'M', "defx#do_action('new_multiple_files')"},
-    {'C', "defx#do_action('toggle_columns', mark:indent:icon:filename:type:size:time)"},
-    {'S', "defx#do_action('toggle_sort', 'time')"},
+    -- {'C', "defx#do_action('toggle_columns', mark:indent:icon:filename:type:size:time)"},
+    -- {'S', "defx#do_action('toggle_sort', 'time')"},
     {'d', "defx#do_action('remove')"},
     {'r', "defx#do_action('rename')"},
     {'!', "defx#do_action('execute_command')"},
@@ -81,7 +85,6 @@ require 'utils'.set_keymap(keymappings)
 
 -- icon
 -- local icons = require 'nvim-web-devicons'.get_icons()
-local g = vim.g
 g.defx_icons_enable_syntax_highlight = 1
 g.defx_icons_column_length = 2
 g.defx_icons_directory_icon = ''
