@@ -27,3 +27,5 @@ require'lsp.lua'
 require'lsp.javascript'
 require'lsp.vimL'
 --require'lsp.kotlin'
+--
+require 'plugins.nvim-compe.keymappings'

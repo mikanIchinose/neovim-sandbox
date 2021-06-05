@@ -1,5 +1,3 @@
--- print'load plugins.lsp.nvim-compe.keymappings'
-
 local utils = require'utils'
 
 local check_back_space = function()
