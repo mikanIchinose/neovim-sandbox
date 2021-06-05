@@ -1,5 +1,0 @@
-[[plugins]]
-repo = 'Shougo/dein.vim'
-[[plugins]]
-repo = 'wsdjeg/dein-ui.vim'
-depends = ['dein']
