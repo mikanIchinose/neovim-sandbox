@@ -110,5 +110,7 @@ wk.register(
     {
         gcc = map.comment.toggle_comment,
     },
-    {mode = 'v'}
+    {
+        mode = 'v'
+    }
 )

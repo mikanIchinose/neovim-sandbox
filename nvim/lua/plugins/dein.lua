@@ -6,7 +6,7 @@ local dein_repo_dir = dein_dir .. '/repos/github.com/Shougo/dein.vim'
 vim.o.runtimepath = dein_repo_dir .. ',' .. vim.o.runtimepath
 
 local toml_dir      = '~/.config/nvim/dein'
-local toml_base         = toml_dir .. '/base.toml'
+local toml_base     = toml_dir .. '/base.toml'
 local toml_lazy     = toml_dir .. '/lazy.toml'
 local toml_ftplugin = toml_dir .. '/ftplugin.toml'
 
