@@ -1,6 +1,7 @@
 version: '3'
 services:
   neovim:
+    #platform: linux/amd64
     build: 
       context: .
       args:
@@ -8,16 +9,18 @@ services:
         VIM_ENABLE_NODE: 'y'
         VIM_ENABLE_PYTHON: 'y'
         VIM_ENABLE_PYTHON3: 'y'
-        VIM_ENABLE_DEIN: ''
+        VIM_ENABLE_DEIN: 'y'
         VIM_ENABLE_PACKER: 'y'
-        RIPGREP_VERSION: '12.1.1'
-        FD_VERSION: '8.2.1'
-        BAT_VERSION: '0.18.1'
+        VIM_ENABLE_DENO: 'y'
+        VIM_ENABLE_GOLANG: 'y'
+        VIM_ENABLE_RUST: 'y'
+        GOLANG_VERSION: '1.17.3'
     volumes:
       - ./nvim:/home/neovim/.config/nvim
+      - ./tmp:/home/neovim/tmp
     tty: true
-    environment:
-      - MYVIMRC=/home/ichinose/.config/nvim/init.lua
+      # environment:
+      # - MYVIMRC=/home/neovim/.config/nvim/init.lua
       # - FZF_DEFAULT_OPTS='--layout=reverse --height=50% --border --ansi'
       # - FZF_DEFAULT_COMMAND='find .'
 

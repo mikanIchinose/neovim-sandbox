@@ -12,5 +12,8 @@ build:
 down:
 	docker-compose down
 
-nvim:
+neovim:
 	docker-compose exec neovim bash
+
+doc:
+	gh markdown-preview --reload
